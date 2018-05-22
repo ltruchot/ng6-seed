@@ -1,4 +1,4 @@
-# Ng6 Seed
+# ng6-seed
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 
@@ -28,13 +28,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Dependencies infos & versions
 
-Previous full update of dependencies: 2018-05-14
+Previous full update of dependencies: 2018-05-22
 * current project version 0.0.1
 * node 10.1.x
 * npm 6.0.x
 * @angular/cli 6.0.3
 * @angular/core 6.0.2
-* rxjs 6.1.0
+* rxjs 6.2.0
 * typescript 2.7.2
 Update native ng package: `ng update`
 Update other dev dependencies: `npm i --save-dev json-server`

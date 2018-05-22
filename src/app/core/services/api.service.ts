@@ -4,10 +4,11 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 // npm
 import { Observable, defer, throwError } from 'rxjs';
 import { catchError, retryWhen, tap } from 'rxjs/operators';
-//  env
+//  values
 import { environment } from '@env/environment';
+import { retryReqStrategy } from '@app/core/values/retry-req-strategy.value';
 // models
-import { IObject } from '@models/common.model';
+import { IFlatObject, IStrObject } from '@models/common.model';
 import {
   EMethods,
   EMethodsWithBody,
@@ -16,7 +17,6 @@ import {
   IReqParamsWithBody,
   TAuthorizedMethods
 } from '@models/http.model';
-import { retryReqStrategy } from '@app/core/values/retry-req-strategy.value';
 
 @Injectable()
 export class ApiService {
@@ -49,7 +49,6 @@ export class ApiService {
     method: TAuthorizedMethods,
     {
       url,
-      auth,
       queryParams,
       apiEnv,
       headers,
@@ -69,7 +68,7 @@ export class ApiService {
 
     // prepare options
     const httpRequestOptions: IReqOptions = {
-      headers: this._createHeaders(headers, auth)
+      headers: this._createHeaders(headers)
     };
     if (queryParams) {
       httpRequestOptions.params = this._createQueryParams(queryParams);
@@ -78,11 +77,11 @@ export class ApiService {
       httpRequestOptions.body = (options as IReqParamsWithBody<T>).body;
     }
 
-    // auth routes could need a retry action
+    // some routes could need a retry action
     // for example, a "refresh token" action in case of 403 / 401
     if (retryOptions && retryOptions.requestToWait) {
       retryOptions.requestToWait.pipe(
-        tap((headers: IObject) => {
+        tap((headers: IFlatObject) => {
           // here, we clone & update headers with a new headers options
           httpRequestOptions.headers = new HttpHeaders({
             ...httpRequestOptions.headers,
@@ -103,22 +102,16 @@ export class ApiService {
     );
   }
 
-  private _createQueryParams(queryParams: IObject): HttpParams {
+  private _createQueryParams(queryParams: IStrObject): HttpParams {
     return queryParams ? new HttpParams({ fromObject: queryParams }) : null;
   }
 
-  private _createHeaders(headers: IObject = {}, auth?: boolean): HttpHeaders {
+  private _createHeaders(headers: IStrObject = {}): HttpHeaders {
     // basic header + custom
-    const httpHeaders: IObject = {
+    const httpHeaders: IStrObject = {
       'Content-Type': this._defaultContentType,
       ...headers
     };
-
-    // add auth
-    const token: string = window.localStorage.getItem('token');
-    if (auth && token) {
-      httpHeaders['Authorization'] = 'Bearer ' + token;
-    }
     return new HttpHeaders(httpHeaders);
   }
 

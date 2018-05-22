@@ -3,7 +3,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 // npm
 import { Observable } from 'rxjs';
 // models
-import { IObject } from '@models/common.model';
+import { IFlatObject, IStrObject } from '@models/common.model';
 
 export interface IReqOptions {
   headers: HttpHeaders;
@@ -34,10 +34,9 @@ export enum EMethodsWithBody {
 }
 
 export interface IReqParams {
-  headers?: IObject;
+  headers?: IStrObject;
   url: string;
-  auth?: boolean;
-  queryParams?: IObject;
+  queryParams?: IStrObject;
   apiEnv?: string;
   retryOptions?: IRetryReqOptions;
 }
@@ -50,5 +49,5 @@ export interface IRetryReqOptions {
   maxRetryAttempts?: number;
   scalingDuration?: number;
   statusCodes?: number[];
-  requestToWait?: Observable<IObject>;
+  requestToWait?: Observable<IFlatObject>;
 }

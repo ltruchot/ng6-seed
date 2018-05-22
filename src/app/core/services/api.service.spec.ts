@@ -3,8 +3,10 @@ import { TestBed, async, inject } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 // services
 import { ApiService } from './api.service';
+// values
+import { environment } from '@env/environment';
 
-const apiEnv = 'http://localhost:3333/';
+const apiEnv = environment.config.testApiUrl;
 
 describe('ApiService', () => {
   beforeEach(() => {
@@ -96,7 +98,7 @@ describe('ApiService', () => {
         .get({
           url: 'posts',
           apiEnv,
-          queryParams: { userId: 1 },
+          queryParams: { userId: '1' },
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         })
         .subscribe((data: any) => {

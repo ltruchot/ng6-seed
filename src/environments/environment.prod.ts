@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   config: {
-    mainApiUrl: 'https://localhost:3333'
+    mainApiUrl: 'http://localhost:3333/',
+    testApiUrl: 'http://localhost:3333/'
   }
 };
