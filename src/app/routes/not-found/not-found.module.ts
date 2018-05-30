@@ -6,6 +6,6 @@ const routes = [{ path: '', component: NotFoundComponent, pathMatch: 'full' }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  declarations: [NotFoundComponent]
+  declarations: [NotFoundComponent],
 })
 export class NotFoundModule {}

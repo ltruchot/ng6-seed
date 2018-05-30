@@ -1,0 +1,30 @@
+<form #register="ngForm"
+      class="register"
+      (submit)="onSubmit(register.value, register.valid, $event)"
+      novalidate>
+  <h2>Register</h2>
+  <div>
+    <label for="email">email:</label>
+    <input name="email"
+           type="email"
+           [ngModel]="user.email"
+           required
+           email />
+  </div>
+  <div>
+    <label for="login">login:</label>
+    <input name="login"
+           type="text"
+           [ngModel]="user.login"
+           required />
+  </div>
+  <div>
+    <label for="password">password:</label>
+    <input name="password"
+           type="password"
+           [ngModel]="user.password"
+           required />
+  </div>
+  <button type="submit"
+          [disabled]="register.invalid">Sign up</button>
+</form>

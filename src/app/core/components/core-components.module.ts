@@ -7,6 +7,6 @@ import { HeaderModule } from './header/header.module';
 @NgModule({
   imports: [FooterModule, HeaderModule],
   declarations: [],
-  exports: [FooterModule, HeaderModule]
+  exports: [FooterModule, HeaderModule],
 })
 export class CoreComponentsModule {}

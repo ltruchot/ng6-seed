@@ -25,16 +25,17 @@ export enum EMethods {
   get = 'GET',
   head = 'HEAD',
   jsonp = 'JSONP',
-  options = 'OPTIONS'
+  options = 'OPTIONS',
 }
 export enum EMethodsWithBody {
   post = 'POST',
   put = 'PUT',
-  patch = 'PATCH'
+  patch = 'PATCH',
 }
 
 export interface IReqParams {
   headers?: IStrObject;
+  auth?: boolean;
   url: string;
   queryParams?: IStrObject;
   apiEnv?: string;

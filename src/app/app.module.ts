@@ -4,8 +4,9 @@ import { NgModule } from '@angular/core';
 // modules
 import { AppRoutingModule } from '@app/app-routing.module';
 import { CoreModule } from '@app/core/core.module';
+import { AppStoreModule } from '@app/store/app-store.module';
 // component
-import { AppComponent } from './app.component';
+import { AppComponent } from '@app/app.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,10 +14,11 @@ import { AppComponent } from './app.component';
     // ng
     BrowserModule,
     // custom
+    AppStoreModule,
     AppRoutingModule,
-    CoreModule
+    CoreModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

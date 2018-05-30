@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   config: {
     mainApiUrl: 'http://localhost:3333/',
-    testApiUrl: 'http://localhost:3333/'
-  }
+    testApiUrl: 'http://localhost:3333/',
+  },
 };
 
 /*

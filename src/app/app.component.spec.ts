@@ -13,7 +13,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterModule, AppRoutingModule, CoreModule],
       declarations: [AppComponent],
-      providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }).compileComponents();
   }));
   it('should create the app', async(() => {

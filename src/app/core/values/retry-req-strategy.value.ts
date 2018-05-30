@@ -5,7 +5,7 @@ export const retryReqStrategy = ({
   maxRetryAttempts = 0,
   scalingDuration = 0,
   statusCodes = [],
-  requestToWait
+  requestToWait,
 }: IRetryReqOptions = {}) => (attempts: Observable<any>) => {
   requestToWait = requestToWait || empty();
   return attempts.pipe(
@@ -21,13 +21,13 @@ export const retryReqStrategy = ({
       }
       console.log(
         `Attempt ${retryAttempt}: retrying in ${retryAttempt *
-          scalingDuration}ms`
+          scalingDuration}ms`,
       );
       // retry after 1s, 2s, etc...
       return requestToWait.pipe(
-        tap(() => timer(retryAttempt * scalingDuration))
+        tap(() => timer(retryAttempt * scalingDuration)),
       );
     }),
-    finalize(() => console.log('We are done!'))
+    finalize(() => console.log('Every retry attemps finished...')),
   );
 };
