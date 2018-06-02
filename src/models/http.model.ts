@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { IFlatObject, IStrObject } from '@models/common.model';
 
 export interface IReqOptions {
+  observe: 'body' | 'response';
   headers: HttpHeaders;
   body?: any;
   params?: HttpParams;
@@ -34,8 +35,8 @@ export enum EMethodsWithBody {
 }
 
 export interface IReqParams {
+  observe?: 'response';
   headers?: IStrObject;
-  auth?: boolean;
   url: string;
   queryParams?: IStrObject;
   apiEnv?: string;

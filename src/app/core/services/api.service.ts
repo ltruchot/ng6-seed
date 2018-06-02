@@ -8,7 +8,7 @@ import { catchError, retryWhen, tap } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { retryReqStrategy } from '@app/core/values/retry-req-strategy.value';
 // models
-import { IFlatObject, IStrObject } from '@models/common.model';
+import { IStrObject } from '@models/common.model';
 import {
   EMethods,
   EMethodsWithBody,
@@ -18,7 +18,9 @@ import {
   TAuthorizedMethods,
 } from '@models/http.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ApiService {
   private _defaultContentType = 'application/json';
   constructor(private http: HttpClient) {}
@@ -49,43 +51,44 @@ export class ApiService {
     method: TAuthorizedMethods,
     {
       url,
-      auth,
       queryParams,
       apiEnv,
       headers,
       retryOptions,
+      observe = 'body',
       ...options
     }: IReqParams | IReqParamsWithBody<T>,
   ): Observable<T> {
     // prepare url
     url = (apiEnv || environment.config.mainApiUrl) + url;
     // check method
-    const reqMethod = EMethods[method] || EMethodsWithBody[method];
-    if (!reqMethod) {
+    const action = EMethods[method] || EMethodsWithBody[method];
+    if (!action) {
       return this._throwReactiveError(
         new Error(`${method} is not a valid HTTP method`),
       ) as Observable<any>;
     }
 
     // prepare options
-    const httpRequestOptions: IReqOptions = {
-      headers: this._createHeaders(headers, auth),
+    const reqOptions: IReqOptions = {
+      headers: this._createHeaders(headers),
+      observe,
     };
     if (queryParams) {
-      httpRequestOptions.params = this._createQueryParams(queryParams);
+      reqOptions.params = this._createQueryParams(queryParams);
     }
     if (EMethodsWithBody[method]) {
-      httpRequestOptions.body = (options as IReqParamsWithBody<T>).body;
+      reqOptions.body = (options as IReqParamsWithBody<T>).body;
     }
 
-    // some routes could need a retry action
+    // some routes could need a retry action with new headers
     // for example, a "refresh token" action in case of 403 / 401
     if (retryOptions && retryOptions.requestToWait) {
-      retryOptions.requestToWait.pipe(
-        tap((newHeaders: IFlatObject) => {
+      retryOptions.requestToWait = retryOptions.requestToWait.pipe(
+        tap((newHeaders: any) => {
           // here, we clone & update headers with a new headers options
-          httpRequestOptions.headers = new HttpHeaders({
-            ...httpRequestOptions.headers,
+          reqOptions.headers = this._createHeaders({
+            ...headers,
             ...newHeaders,
           });
         }),
@@ -95,8 +98,7 @@ export class ApiService {
     // do request, retry if needed, and catch any error as observable
     // defer is needed to allow params change  during retryWhen rxjs action
     return defer(
-      () =>
-        this.http.request(reqMethod, url, httpRequestOptions) as Observable<T>,
+      () => this.http.request(action, url, reqOptions) as Observable<T>,
     ).pipe(
       retryWhen(retryReqStrategy(retryOptions || {})),
       catchError(this._throwReactiveError),
@@ -107,22 +109,12 @@ export class ApiService {
     return queryParams ? new HttpParams({ fromObject: queryParams }) : null;
   }
 
-  private _createHeaders(
-    headers: IStrObject = {},
-    auth?: boolean,
-  ): HttpHeaders {
+  private _createHeaders(headers: IStrObject = {}): HttpHeaders {
     // basic header + custom
     const httpHeaders: IStrObject = {
       'Content-Type': this._defaultContentType,
       ...headers,
     };
-
-    // add auth
-    const token: string = window.localStorage.getItem('token');
-    if (auth && token) {
-      httpHeaders['Authorization'] = 'Bearer ' + token;
-    }
-
     return new HttpHeaders(httpHeaders);
   }
 

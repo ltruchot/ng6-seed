@@ -1,8 +1,12 @@
 // ng
 import { TestBed, async, inject } from '@angular/core/testing';
-import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpErrorResponse,
+  HttpResponse,
+} from '@angular/common/http';
 // npm
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 // services
 import { ApiService } from './api.service';
@@ -10,7 +14,6 @@ import { ApiService } from './api.service';
 import { environment } from '@env/environment';
 // models
 import { IPost } from '@models/test.model';
-import { IUser } from '@models/user.model';
 
 const apiEnv = environment.config.testApiUrl;
 
@@ -18,19 +21,8 @@ describe('ApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [ApiService],
+      providers: [],
     });
-
-    // emulate local storage for auth route
-    const fakeLocalStorage = {
-      token: 'fake-token',
-    };
-    const mockLocalStorage = {
-      getItem: (key: string): string => {
-        return key in fakeLocalStorage ? fakeLocalStorage[key] : null;
-      },
-    };
-    spyOn(localStorage, 'getItem').and.callFake(mockLocalStorage.getItem);
   });
 
   it(
@@ -111,6 +103,24 @@ describe('ApiService', () => {
       });
     }),
   ));
+  it('it should perform a HEAD request', async(
+    inject([ApiService], (apiService: ApiService) => {
+      apiService
+        .head({ url: 'posts', observe: 'response', apiEnv })
+        .subscribe((data: HttpResponse<any>) => {
+          expect(data.status).toBe(200);
+        });
+    }),
+  ));
+  it('it should perform a CUSTOM request', async(
+    inject([ApiService], (apiService: ApiService) => {
+      apiService
+        .request('head', { url: 'posts', observe: 'response', apiEnv })
+        .subscribe((data: HttpResponse<any>) => {
+          expect(data.status).toBe(200);
+        });
+    }),
+  ));
   it('it should perform a GET request with url params encoded', async(
     inject([ApiService], (apiService: ApiService) => {
       apiService
@@ -124,37 +134,6 @@ describe('ApiService', () => {
           expect(data.length).toBe(10);
           expect(data[1].title).toBe('qui est esse');
         });
-    }),
-  ));
-  it('Authenticated route with credential should return waited value', async(
-    inject([ApiService], (apiService: ApiService) => {
-      expect(
-        apiService
-          .get({ url: 'user', auth: true, apiEnv })
-          .pipe(
-            tap((user: IUser) => {
-              expect(user.email).toBe('fakeuser@fakedomain.fake');
-            }),
-          )
-          .subscribe(),
-      );
-    }),
-  ));
-  it('Authenticated route with bad credentials should throw an error 401', async(
-    inject([ApiService], (apiService: ApiService) => {
-      expect(
-        apiService
-          .get({ url: 'user', apiEnv })
-          .pipe(
-            catchError(err => {
-              expect(err.status).toBe(401);
-              return of(err);
-            }),
-          )
-          .subscribe(data =>
-            expect(data instanceof HttpErrorResponse).toBeTruthy(),
-          ),
-      );
     }),
   ));
   it('404 response should throw a reactive error', async(

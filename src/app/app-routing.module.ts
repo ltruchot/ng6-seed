@@ -10,16 +10,6 @@ const appRoutes: Routes = [
     loadChildren: '@routes/home/home.module#HomeModule',
   },
   {
-    path: 'posts',
-    pathMatch: 'full',
-    loadChildren: '@routes/posts/posts.module#PostsModule',
-  },
-  {
-    path: 'auth',
-    pathMatch: 'full',
-    loadChildren: '@routes/auth/auth.module#AuthModule',
-  },
-  {
     path: 'not-found',
     pathMatch: 'full',
     loadChildren: '@routes/not-found/not-found.module#NotFoundModule',
