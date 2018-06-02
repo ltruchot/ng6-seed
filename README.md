@@ -2,7 +2,7 @@
 
 ## install factory
 1. Choose your version of the factory, by choosing a branch.
-  -  `master`: evething (core + multilanguage)
+  -  `master`: everything
   -  `core`: only well formed scaffolding && basic features (CoreModule, apiService, basic router outlet)
   -  `core+lang`: core + a fully integreted translation system with `@ngx-translate/core`
   -  `core+store`: core + a redux `@ngrx/store` fully angular compliant, with examples 
