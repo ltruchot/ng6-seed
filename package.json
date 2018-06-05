@@ -12,6 +12,7 @@
     "pretest": "pm2 start ./test/server.js",
     "test": "ng test --code-coverage --browsers PhantomJS --environment test --watch false",
     "posttest": "pm2 stop ./test/server.js",
+    "test:local": "ng test --karma-config src/karma.conf.local.js",
     "test:restart-server": "pm2 restart ./test/server.js",
     "test:delete-server": "pm2 delete ./test/server.js",
     "lint": "ng lint",

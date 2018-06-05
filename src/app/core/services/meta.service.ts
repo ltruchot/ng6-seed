@@ -21,7 +21,7 @@ export class MetaService {
     private _title: Title,
   ) {}
 
-  init() {
+  init(): void {
     // add indexation in production
     if (environment.production) {
       this.upsertMeta('robots', this.seo.index);
