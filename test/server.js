@@ -18,7 +18,7 @@ server.get('/user', (req, res) => {
     res.json({
       login: 'fake user',
       email: 'fakeuser@fakedomain.fake',
-      id: 123,
+      id: 'fakeid',
     });
   } else {
     res.status(401).json({ message: 'Invalid token' });

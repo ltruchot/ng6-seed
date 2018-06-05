@@ -59,7 +59,7 @@ describe('retryReqStrategy', () => {
       defer(() => http.request('get', url, reqOptions))
         .pipe(retryWhen(retryReqStrategy(retryOptions)))
         .subscribe((user: any) => {
-          expect(user.id).toBe(123);
+          expect(user.id).toBe('fakeid');
         });
     }),
   ));

@@ -35,7 +35,7 @@ export enum EMethodsWithBody {
 }
 
 export interface IReqParams {
-  observe?: 'response';
+  observe?: 'body' | 'response';
   headers?: IStrObject;
   url: string;
   queryParams?: IStrObject;

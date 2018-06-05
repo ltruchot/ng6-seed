@@ -4,17 +4,22 @@ import { DOCUMENT, Meta, Title } from '@angular/platform-browser';
 // values
 import { environment } from '@env/environment';
 // models
-import { ISeoData } from '@models/meta.model';
+import { IMetaSeo, IMetaVersion } from '@models/meta.model';
 
+// get version from package.json
+declare var require: any;
 const { version } = require('@app/../../package.json');
 
 @Injectable({ providedIn: 'root' })
 export class MetaService {
-  public seo: ISeoData = {
+  public seo: IMetaSeo = {
     index: 'index,follow',
     noindex: 'noindex,nofollow,noarchive,nosnippet,noimageindex',
   };
-  public version: string = version;
+  public version: IMetaVersion = {
+    version,
+    env: environment.production ? 'prod' : 'dev',
+  };
   constructor(
     @Inject(DOCUMENT) private _document: HTMLDocument,
     private _meta: Meta,
@@ -22,12 +27,9 @@ export class MetaService {
   ) {}
 
   init(): void {
-    // add indexation in production
-    if (environment.production) {
-      this.upsertMeta('robots', this.seo.index);
-    } else {
-      this.upsertMeta('robots', this.seo.noindex);
-    }
+    // this app need to be unindexed from google
+    // no seo needed
+    this.upsertMeta('robots', this.seo.noindex);
   }
 
   upsertMeta(name: string, content: string, isProperty?: boolean): void {
