@@ -1,0 +1,22 @@
+@mixin spacing($property, $direction, $value) {
+  @if $direction == t {
+      #{$property}-top: $value;
+  }
+  @if $direction == b {
+    #{$property}-bottom: $value;
+  }
+  @if $direction == l {
+    #{$property}-left: $value;
+  }
+  @if $direction == r {
+    #{$property}-right: $value;
+  }
+  @if $direction == h {
+    #{$property}-left: $value;
+    #{$property}-right: $value;
+  }
+  @if $direction == v {
+    #{$property}-top: $value;
+    #{$property}-bottom: $value;
+  }
+}

@@ -1,0 +1,10 @@
+<h1>Authenticate</h1>
+<app-auth-form></app-auth-form>
+<!-- display loader when store indicate "loading" -->
+<div class="grey-overlay"
+     *ngIf="authLoading$ | async">
+  loading...
+</div>
+<div *ngIf="this.authError$ | async">Last error:
+  <pre>{{ this.authError$ | async | json }}</pre>
+</div>

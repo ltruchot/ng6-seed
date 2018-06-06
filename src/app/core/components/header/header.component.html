@@ -1,3 +1,12 @@
 <header>
-  @core/components/header/header.component works!
+  @core/components/header.component works!
+  <br />
+  <a routerLink="/home">home</a> |
+  <a routerLink="/not-found">404</a> |
+  <a routerLink="/admin">admin</a> |
+  <a *ngIf="!(currentUser$ | async)"
+     routerLink="/auth">auth</a>
+  <a *ngIf="currentUser$ | async"
+     (click)="onLogout($event)"
+     href="#">log out</a>
 </header>

@@ -1,0 +1,41 @@
+@import "variables";
+@import "mixins";
+// margin
+.m {
+  margin: $spacing;
+  @each $size, $value in $spacing-sizes {
+    &-#{$size} {
+      margin: $value;
+    }
+  }
+  @each $dir in $direction {
+    &#{$dir} {
+      @include spacing("margin", $dir, $spacing);
+    }
+    @each $size, $value in $spacing-sizes {
+      &#{$dir}-#{$size} {
+        @include spacing("margin", $dir, $value);
+      }
+    }    
+  }
+}
+
+// padding
+.p {
+  padding: $spacing;
+  @each $size, $value in $spacing-sizes {
+    &-#{$size} {
+      padding: $value;
+    }
+  }
+  @each $dir in $direction {
+    &#{$dir} {
+      @include spacing("padding", $dir, $spacing);
+    }
+    @each $size, $value in $spacing-sizes {
+      &#{$dir}-#{$size} {
+        @include spacing("padding", $dir, $value);
+      }
+    }
+  }  
+}

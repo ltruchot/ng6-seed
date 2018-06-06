@@ -3,22 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 // modules
 import { AppRoutingModule } from '@app/app-routing.module';
-import { CoreModule } from '@app/core/core.module';
-// component
-import { AppComponent } from '@app/app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from '@core/core.module';
+import { SharedModule } from '@shared/shared.module';
+import { AppStoreModule } from '@store/app-store.module';
+// components
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     // ng
     BrowserModule,
-    HttpClientModule,
     // custom
     AppRoutingModule,
+    AppStoreModule.forRoot(),
     CoreModule,
+    SharedModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

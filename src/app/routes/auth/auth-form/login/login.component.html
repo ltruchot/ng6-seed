@@ -1,0 +1,27 @@
+<form #auth="ngForm"
+      class="form"
+      (ngSubmit)="onSubmit(auth.value, auth.valid)"
+      novalidate>
+  <h2>Login</h2>
+  <div class="form__group">
+    <label class="form__label"
+           for="login">login:</label>
+    <input class="form__input"
+           name="login"
+           type="text"
+           [ngModel]="user.login"
+           required />
+  </div>
+  <div class="form__group">
+    <label class="form__label"
+           for="password">password:</label>
+    <input class="form__input"
+           name="password"
+           type="password"
+           [ngModel]="user.password"
+           required />
+  </div>
+  <button class="btn btn--primary mt"
+          type="submit"
+          [disabled]="auth.invalid">Sign in</button>
+</form>

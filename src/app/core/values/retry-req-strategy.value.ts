@@ -1,13 +1,16 @@
-import { Observable, throwError, empty, timer } from 'rxjs';
-import { mergeMap, finalize, tap, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { _throw } from 'rxjs/observable/throw';
+import { timer } from 'rxjs/observable/timer';
+import { empty } from 'rxjs/observable/empty';
+import { mergeMap, finalize, tap } from 'rxjs/operators';
 import { IRetryReqOptions } from '@models/http.model';
 export const retryReqStrategy = ({
   maxRetryAttempts = 0,
   scalingDuration = 0,
   statusCodes = [],
-  requestToWait = empty(),
+  requestToWait
 }: IRetryReqOptions = {}) => (attempts: Observable<any>) => {
-  console.log('requestToWait', requestToWait);
+  requestToWait = requestToWait || empty();
   return attempts.pipe(
     mergeMap((error, i) => {
       const retryAttempt = i + 1;
@@ -15,22 +18,19 @@ export const retryReqStrategy = ({
       // or response is a status code we don't wish to retry, throw error
       if (
         retryAttempt > maxRetryAttempts ||
-        statusCodes.find(e => e === error.status)
+        !statusCodes.find(e => e === error.status)
       ) {
-        console.log('throw');
-        return throwError(error);
+        return _throw(error);
       }
       console.log(
         `Attempt ${retryAttempt}: retrying in ${retryAttempt *
-          scalingDuration}ms`,
+          scalingDuration}ms`
       );
       // retry after 1s, 2s, etc...
-      return timer(scalingDuration).pipe(
-        switchMap(() =>
-          requestToWait.pipe(tap(data => console.log('data', data))),
-        ),
+      return requestToWait.pipe(
+        tap(() => timer(retryAttempt * scalingDuration))
       );
     }),
-    finalize(() => console.log('Every retry attemps finished...')),
+    finalize(() => console.log('We are done!'))
   );
 };

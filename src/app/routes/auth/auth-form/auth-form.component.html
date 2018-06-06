@@ -1,0 +1,18 @@
+<div class="auth-form">
+  <!-- display welcome message if user is already auth -->
+  <div *ngIf="currentUser; else displayAuthForm">
+    You're already logged in.
+    <a routerLink="/home">Go back home.</a>
+  </div>
+  <!-- display an auth form if user isn't auth -->
+  <ng-template #displayAuthForm>
+    <app-login *ngIf="displayedForm === 'login'"
+               (login)="onLogin($event)"></app-login>
+    <app-register *ngIf="displayedForm === 'register'"
+                  (register)="onRegister($event)"></app-register>
+    <p *ngIf="displayedForm === 'login'">New to Adneom Ngx Factory?
+      <button class="btn btn--secondary"
+              (click)="displayedForm = 'register'">Create an account</button>
+    </p>
+  </ng-template>
+</div>

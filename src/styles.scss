@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+// basics
+@import "./styles/variables";
+@import "./styles/mixins";
+@import "./styles/fonts";
+@import "./styles/helpers";
+@import "./styles/base";
+
+// BEM blocks
+@import "./styles/blocks/button";
+@import "./styles/blocks/form";
