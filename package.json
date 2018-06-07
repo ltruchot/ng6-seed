@@ -32,6 +32,8 @@
     "@angular/platform-browser": "6.0.4",
     "@angular/platform-browser-dynamic": "6.0.4",
     "@angular/router": "6.0.4",
+    "@ngx-translate/core": "10.0.2",
+    "@ngx-translate/http-loader": "3.0.1",
     "@ngrx/effects": "6.0.1",
     "@ngrx/entity": "6.0.1",
     "@ngrx/store": "6.0.1",
@@ -62,7 +64,7 @@
     "karma-phantomjs-launcher": "1.0.4",
     "phantomjs-prebuilt": "2.1.16",
     "pm2": "2.10.4",
-    "protractor": "5.3.0",
+    "protractor": "5.3.2",
     "ts-node": "5.0.1",
     "tslint": "5.9.1",
     "typescript": "2.7.2"

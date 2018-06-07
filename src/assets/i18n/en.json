@@ -1,0 +1,10 @@
+{
+  "i18n": {
+    "common": {
+      "welcome_to": "Welcome to"
+    },
+    "app": {
+      "change_language": "Translate website to {{ value }}"
+    }
+  }
+}

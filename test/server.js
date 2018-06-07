@@ -16,7 +16,7 @@ server.post('/login', (req, res) => res.json(token));
 server.get('/user', (req, res) => {
   if (req.get('Authorization') === 'Bearer ' + token) {
     res.json({
-      login: 'fake user',
+      login: 'fakeuser',
       email: 'fakeuser@fakedomain.fake',
       id: 'fakeid',
     });

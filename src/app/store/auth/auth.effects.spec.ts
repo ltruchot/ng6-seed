@@ -2,21 +2,21 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { PostEffects } from './post.effects';
-import { HttpClientModule } from '@angular/common/http';
+import { AuthEffects } from './auth.effects';
 import { ApiService } from '@app/core/services/api.service';
+import { HttpClientModule } from '@angular/common/http';
 
-describe('PostEffects', () => {
+describe('AuthEffects', () => {
   let actions$: Observable<any>;
-  let effects: PostEffects;
+  let effects: AuthEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [PostEffects, ApiService, provideMockActions(() => actions$)],
+      providers: [AuthEffects, ApiService, provideMockActions(() => actions$)],
     });
 
-    effects = TestBed.get(PostEffects);
+    effects = TestBed.get(AuthEffects);
   });
 
   it('should be created', () => {

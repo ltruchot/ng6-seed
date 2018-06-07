@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 // modules
 import { CoreComponentsModule } from './components/core-components.module';
+import { MultilangModule } from '@app/core/modules/multilang.module';
 
 @NgModule({
-  imports: [CommonModule, CoreComponentsModule],
+  imports: [CommonModule, CoreComponentsModule, MultilangModule],
   declarations: [],
   providers: [],
-  exports: [CoreComponentsModule],
+  exports: [CoreComponentsModule, MultilangModule],
 })
 export class CoreModule {
   constructor(

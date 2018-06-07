@@ -18,9 +18,7 @@ import {
   TAuthorizedMethods,
 } from '@models/http.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class ApiService {
   private _defaultContentType = 'application/json';
   constructor(private http: HttpClient) {}
@@ -51,6 +49,7 @@ export class ApiService {
     method: TAuthorizedMethods,
     {
       url,
+      auth,
       queryParams,
       apiEnv,
       headers,
@@ -71,7 +70,7 @@ export class ApiService {
 
     // prepare options
     const reqOptions: IReqOptions = {
-      headers: this._createHeaders(headers),
+      headers: this._createHeaders(headers, auth),
       observe,
     };
     if (queryParams) {
@@ -87,10 +86,13 @@ export class ApiService {
       retryOptions.requestToWait = retryOptions.requestToWait.pipe(
         tap((newHeaders: any) => {
           // here, we clone & update headers with a new headers options
-          reqOptions.headers = this._createHeaders({
-            ...headers,
-            ...newHeaders,
-          });
+          reqOptions.headers = this._createHeaders(
+            {
+              ...headers,
+              ...newHeaders,
+            },
+            auth,
+          );
         }),
       );
     }
@@ -109,12 +111,22 @@ export class ApiService {
     return queryParams ? new HttpParams({ fromObject: queryParams }) : null;
   }
 
-  private _createHeaders(headers: IStrObject = {}): HttpHeaders {
+  private _createHeaders(
+    headers: IStrObject = {},
+    auth?: boolean,
+  ): HttpHeaders {
     // basic header + custom
     const httpHeaders: IStrObject = {
       'Content-Type': this._defaultContentType,
       ...headers,
     };
+
+    // add auth
+    const token: string = window.localStorage.getItem('token');
+    if (auth && token) {
+      httpHeaders['Authorization'] = 'Bearer ' + token;
+    }
+
     return new HttpHeaders(httpHeaders);
   }
 

@@ -49,7 +49,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Dependencies infos & versions
 
 Previous full update of dependencies: 2018-06-02
-
 * current project version 0.2.0
 * node 10.4.x
 * npm 6.1.x
@@ -63,6 +62,7 @@ Update native ng package: `ng update`
 Update other dependencies: `ng update --all`
 
 ## Infos
+>>>>>>> core+multilang
 * **json-server**: Get a full fake REST API with zero coding in less than 30 seconds (seriously)
   - _used to provide a fake server for test purpose, especially requests modules jobs like apiService_
 * **pm2**: Node.js Production Process Manager with a built-in Load Balancer.
@@ -74,3 +74,4 @@ Update other dependencies: `ng update --all`
 ## Test dependencies
 
 @types/jasmine @types/jasminewd2 jasmine-core jasmine-spec-reporter karma karma-chrome-launcher karma-coverage-istanbul-reporter karma-jasmine karma-jasmine-html-reporter karma-mocha-reporter karma-phantomjs-launcher phantomjs-prebuilt protractor 
+
