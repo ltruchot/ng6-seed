@@ -7,7 +7,6 @@ export const retryReqStrategy = ({
   statusCodes = [],
   requestToWait = empty(),
 }: IRetryReqOptions = {}) => (attempts: Observable<any>) => {
-  console.log('requestToWait', requestToWait);
   return attempts.pipe(
     mergeMap((error, i) => {
       const retryAttempt = i + 1;
@@ -17,7 +16,6 @@ export const retryReqStrategy = ({
         retryAttempt > maxRetryAttempts ||
         statusCodes.find(e => e === error.status)
       ) {
-        console.log('throw');
         return throwError(error);
       }
       console.log(

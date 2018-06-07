@@ -1,6 +1,7 @@
 // ng
 import { Inject, Injectable } from '@angular/core';
-import { DOCUMENT, Meta, Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 // values
 import { environment } from '@env/environment';
 // models

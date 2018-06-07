@@ -6,7 +6,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 // npm
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 // services
 import { ApiService } from './api.service';
@@ -25,82 +25,73 @@ describe('ApiService', () => {
     });
   });
 
-  it(
-    'it should be created',
+  it('it should be created', inject([ApiService], (apiService: ApiService) => {
+    expect(apiService).toBeTruthy();
+  }));
+  it('it should perform GET/PUT/PATCH request', async(
     inject([ApiService], (apiService: ApiService) => {
-      expect(apiService).toBeTruthy();
-    }),
-  );
-  it('it should perform a GET request', async(
-    inject([ApiService], (apiService: ApiService) => {
-      apiService.get({ url: 'posts', apiEnv }).subscribe((data: IPost[]) => {
-        expect(data.length).toBe(100);
-        expect(data[0].title).toBe(
-          'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-        );
-      });
-    }),
-  ));
-  it('it should perform a PUT request', async(
-    inject([ApiService], (apiService: ApiService) => {
+      const title = 'foo updated';
       apiService
-        .put({
-          url: 'posts/1',
-          body: {
-            id: 1,
-            title: 'foo',
-            body: `quia et suscipit
-              suscipit recusandae consequuntur expedita et cum
-              reprehenderit molestiae ut ut quas totam
-              nostrum rerum est autem sunt rem eveniet architecto`,
-            userId: 1,
-          },
-          apiEnv,
-        })
-        .subscribe((data: IPost) => {
-          expect(data.title).toBe('foo');
-        });
+        .get({ url: 'posts', apiEnv })
+        .pipe(
+          tap((data: IPost[]) => {
+            expect(data.length).toBe(5);
+            expect(data[0].title).toBe('foo 1');
+          }),
+          switchMap(() =>
+            apiService.put({
+              url: 'posts/1',
+              body: {
+                id: 1,
+                title,
+                body: 'bar 1',
+                userId: 1,
+              },
+              apiEnv,
+            }),
+          ),
+          tap((data: IPost) => {
+            expect(data.title).toBe(title);
+          }),
+          switchMap(() =>
+            apiService.patch({
+              url: 'posts/1',
+              body: {
+                title: 'foo 1',
+              },
+              apiEnv,
+            }),
+          ),
+          tap((data: IPost) => {
+            expect(data.title).toBe('foo 1');
+          }),
+        )
+        .subscribe();
     }),
   ));
-  it('it should perform a PATCH request', async(
+  it('it should perform a POST & DELETE request', async(
     inject([ApiService], (apiService: ApiService) => {
-      const title =
-        'sunt aut facere repellat provident occaecati excepturi optio reprehenderit';
-      apiService
-        .patch({
-          url: 'posts/1',
-          body: {
-            title,
-          },
-          apiEnv,
-        })
-        .subscribe((data: IPost) => {
-          expect(data.title).toBe(title);
-        });
-    }),
-  ));
-  it('it should perform a POST request', async(
-    inject([ApiService], (apiService: ApiService) => {
+      const title = 'foo 6';
       apiService
         .post({
           url: 'posts',
           body: {
-            title: 'foo',
-            body: 'bar',
+            title,
+            body: 'bar 6',
             userId: 1,
           },
           apiEnv,
         })
-        .subscribe((data: IPost) => {
-          expect(data.title).toBe('foo');
-        });
-    }),
-  ));
-  it('it should perform a DELETE request', async(
-    inject([ApiService], (apiService: ApiService) => {
-      apiService.delete({ url: 'posts/101', apiEnv }).subscribe((data: any) => {
-        expect(data).toEqual({});
-      });
+        .pipe(
+          tap((data: IPost) => {
+            expect(data.title).toBe(title);
+          }),
+          switchMap(() => apiService.delete({ url: 'posts/6', apiEnv })),
+          tap((data: any) => {
+            expect(data).toEqual({});
+          }),
+        )
+        .subscribe();
     }),
   ));
   it('it should perform a HEAD request', async(
@@ -131,8 +122,7 @@ describe('ApiService', () => {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         })
         .subscribe((data: IPost[]) => {
-          expect(data.length).toBe(10);
-          expect(data[1].title).toBe('qui est esse');
+          expect(data[1].title).toBe('foo 2');
         });
     }),
   ));

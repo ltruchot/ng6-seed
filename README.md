@@ -50,11 +50,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Previous full update of dependencies: 2018-06-02
 
-* current project version 0.1.0
-* node 10.3.x
+* current project version 0.2.0
+* node 10.4.x
 * npm 6.1.x
-* @angular/cli 6.0.7
-* @angular/core 6.0.3
+* @angular/cli 6.0.8
+* @angular/core 6.0.4
 * rxjs 6.2.0
 * typescript 2.7.2
 
@@ -62,7 +62,7 @@ Update native ng package: `ng update`
 
 Update other dependencies: `ng update --all`
 
-Infos:
+## Infos
 * **json-server**: Get a full fake REST API with zero coding in less than 30 seconds (seriously)
   - _used to provide a fake server for test purpose, especially requests modules jobs like apiService_
 * **pm2**: Node.js Production Process Manager with a built-in Load Balancer.
@@ -70,3 +70,7 @@ Infos:
 * **@ngx-translate/core**: The internationalization (i18n) library for Angular
 * **@ngx-translate/http-loader**: A loader for ngx-translate that loads translations with http calls
 * **@ngrx/store**: RxJS powered state management for Angular applications, inspired by Redux
+
+## Test dependencies
+
+@types/jasmine @types/jasminewd2 jasmine-core jasmine-spec-reporter karma karma-chrome-launcher karma-coverage-istanbul-reporter karma-jasmine karma-jasmine-html-reporter karma-mocha-reporter karma-phantomjs-launcher phantomjs-prebuilt protractor 

@@ -6,12 +6,10 @@ const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   {
     path: 'home',
-    pathMatch: 'full',
     loadChildren: '@routes/home/home.module#HomeModule',
   },
   {
     path: 'not-found',
-    pathMatch: 'full',
     loadChildren: '@routes/not-found/not-found.module#NotFoundModule',
   },
   {
