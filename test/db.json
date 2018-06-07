@@ -1,7 +1,34 @@
 {
-  "users": {
-    "email": "test@test.test",
-    "password": "test",
-    "token": "abcdef"
-  } 
+  "posts": [
+    {
+      "id": 1,
+      "title": "foo 1",
+      "body": "bar 1",
+      "userId": 1
+    },
+    {
+      "userId": 1,
+      "id": 2,
+      "title": "foo 2",
+      "body": "bar 2"
+    },
+    {
+      "userId": 1,
+      "id": 3,
+      "title": "foo 3",
+      "body": "bar 3"
+    },
+    {
+      "userId": 2,
+      "id": 4,
+      "title": "foo 4",
+      "body": "bar 4"
+    },
+    {
+      "userId": 2,
+      "id": 5,
+      "title": "foo 5",
+      "body": "bar 5"
+    }
+  ]
 }

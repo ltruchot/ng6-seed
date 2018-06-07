@@ -1,21 +1,22 @@
+// ng
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-// import { PipesModule } from './pipes/pipes.module';
-// import { DirectivesModule } from './directives/directives.module';
-import { ComponentsModule } from './components/components.module';
-
-// Pipes
+// modules
+import { SharedPipesModule } from '@shared/pipes/shared-pipes.module';
+import { SharedComponentsModule } from '@shared/components/shared-components.module';
 
 @NgModule({
-  imports: [/* PipesModule, DirectivesModule, */ ComponentsModule],
+  imports: [SharedPipesModule, SharedComponentsModule],
   exports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
-    ComponentsModule /*, PipesModule, DirectivesModule*/
+    SharedComponentsModule,
+    SharedPipesModule,
   ],
-  declarations: []
+  declarations: [],
 })
 export class SharedModule {}

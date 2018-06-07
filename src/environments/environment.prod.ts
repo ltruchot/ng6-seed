@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   config: {
-    mainApiUrl: 'https://factory.adneomdevops.com/'
-  }
+    mainApiUrl: 'http://localhost:3333/',
+    testApiUrl: 'http://localhost:3333/',
+  },
 };

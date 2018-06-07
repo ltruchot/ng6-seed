@@ -1,11 +1,12 @@
 // ng
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 // npm
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 // models
-import { IObject } from '@models/common.model';
+import { IFlatObject, IStrObject } from '@models/common.model';
 
 export interface IReqOptions {
+  observe: 'body' | 'response';
   headers: HttpHeaders;
   body?: any;
   params?: HttpParams;
@@ -25,19 +26,19 @@ export enum EMethods {
   get = 'GET',
   head = 'HEAD',
   jsonp = 'JSONP',
-  options = 'OPTIONS'
+  options = 'OPTIONS',
 }
 export enum EMethodsWithBody {
   post = 'POST',
   put = 'PUT',
-  patch = 'PATCH'
+  patch = 'PATCH',
 }
 
 export interface IReqParams {
-  headers?: IObject;
+  observe?: 'body' | 'response';
+  headers?: IStrObject;
   url: string;
-  auth?: boolean;
-  queryParams?: IObject;
+  queryParams?: IStrObject;
   apiEnv?: string;
   retryOptions?: IRetryReqOptions;
 }
@@ -50,5 +51,5 @@ export interface IRetryReqOptions {
   maxRetryAttempts?: number;
   scalingDuration?: number;
   statusCodes?: number[];
-  requestToWait?: Observable<IObject>;
+  requestToWait?: Observable<IFlatObject>;
 }

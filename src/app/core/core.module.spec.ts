@@ -1,4 +1,3 @@
-// ng
 import { CoreModule } from './core.module';
 
 describe('CoreModule', () => {
