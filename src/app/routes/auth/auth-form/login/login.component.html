@@ -1,6 +1,6 @@
 <form #auth="ngForm"
       class="form"
-      (ngSubmit)="onSubmit(auth.value, auth.valid)"
+      (ngSubmit)="onSubmit(auth.value, auth.valid, $event)"
       novalidate>
   <h2>Login</h2>
   <div class="form__group">
