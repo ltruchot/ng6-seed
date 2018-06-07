@@ -7,7 +7,7 @@
   -  `core+lang`: core + a fully integreted translation system with `@ngx-translate/core`
   -  `core+store`: core + a redux `@ngrx/store` fully angular compliant, with examples 
   -  `core+auth`: core + a classic register/login/user/logout token based auth.
-  -  `core+lang+store`: @see above 
+  -  `core+lang+store+auth`: @see above 
 2. Create a new folder for your project. Copy every files and folders except `node_modules`, `dist`, `package-lock.json`
 3. In your project, modify package.json project name, and other infos (you can replace ng6-seed by your project-name everywhere)
 
@@ -62,7 +62,7 @@ Update native ng package: `ng update`
 Update other dependencies: `ng update --all`
 
 ## Infos
->>>>>>> core+multilang
+
 * **json-server**: Get a full fake REST API with zero coding in less than 30 seconds (seriously)
   - _used to provide a fake server for test purpose, especially requests modules jobs like apiService_
 * **pm2**: Node.js Production Process Manager with a built-in Load Balancer.
