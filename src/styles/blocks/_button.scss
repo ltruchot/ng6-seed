@@ -1,0 +1,19 @@
+.btn {
+  color: $light;
+  cursor: pointer;
+  font-size: $font-size;
+  padding: $button-padding;
+  border: none;
+  height: $button-height;
+  @each $name, $value in $colors {
+    &--#{$name} {
+      background-color: $value;
+    }
+  }
+  &[disabled],
+  &.disabled {
+    cursor: not-allowed;
+    background: $input-disabled-background;
+    color: $input-disabled-color;
+  }
+}

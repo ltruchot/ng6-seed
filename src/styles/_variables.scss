@@ -1,0 +1,51 @@
+// colors
+$primary: #007bff;
+$secondary: #5a6268;
+$light: #ffffff;
+$dark: #000000;
+$danger: #dc3545;
+$success: #28a745;
+$colors: (
+  primary: $primary,
+  secondary: $secondary,
+  light: $light,
+  dark: $dark,
+  danger: $danger,
+  success: $success
+  );
+
+
+// font
+$font-size-base: 16px;
+$font-size: 1rem;
+$font-family: Arial, sans-serif;
+
+// helpers
+$spacing: 20px;
+// use class "m" for "margin: 20px", "m-double" for 40px, "m-sesqui" for 30px;
+// use class "mt" for "margin-top: 20px;", mt-half for 10px, etc.
+// use class "pb-quarter" for "padding-bottom: 5px;", etc.  
+// use class "pv" for "padding: 20px 0;" & "mh-double" for "margin: 0 40px;"
+$spacing-sizes: none 0, double ($spacing * 2), sesqui ($spacing * 1.5),
+  half ($spacing / 2), quarter ($spacing / 4);
+$direction: t, l, r, b, v, h;
+
+// buttons
+$button-height: 40px;
+$button-padding: 10px 15px;
+$button-disabled-background: #999999;
+$button-disabled-border-color: #444444;
+
+// inputs
+$input-height: 40px;
+$input-border: 1px solid #999999;
+$input-radius: 2px;
+$input-font-size: 1rem;
+$input-padding-horizontal: 15px;
+$input-disabled-background: #999999;
+$input-disabled-color: #444444;
+
+$input-label-color: $dark;
+$input-label-font-size: .85rem;
+
+
