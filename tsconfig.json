@@ -23,6 +23,7 @@
       "@core/*": ["app/core/*"],
       "@routes/*": ["app/routes/*"],
       "@shared/*": ["app/shared/*"],
+      "@store/*": ["app/store/*"],
       "@models/*": ["models/*"],
       "@env/*": ["environments/*"]
     }

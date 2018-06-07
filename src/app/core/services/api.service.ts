@@ -51,7 +51,6 @@ export class ApiService {
     method: TAuthorizedMethods,
     {
       url,
-      auth,
       queryParams,
       apiEnv,
       headers,
@@ -72,7 +71,7 @@ export class ApiService {
 
     // prepare options
     const reqOptions: IReqOptions = {
-      headers: this._createHeaders(headers, auth),
+      headers: this._createHeaders(headers),
       observe,
     };
     if (queryParams) {
@@ -88,13 +87,10 @@ export class ApiService {
       retryOptions.requestToWait = retryOptions.requestToWait.pipe(
         tap((newHeaders: any) => {
           // here, we clone & update headers with a new headers options
-          reqOptions.headers = this._createHeaders(
-            {
-              ...headers,
-              ...newHeaders,
-            },
-            auth,
-          );
+          reqOptions.headers = this._createHeaders({
+            ...headers,
+            ...newHeaders,
+          });
         }),
       );
     }
@@ -113,22 +109,12 @@ export class ApiService {
     return queryParams ? new HttpParams({ fromObject: queryParams }) : null;
   }
 
-  private _createHeaders(
-    headers: IStrObject = {},
-    auth?: boolean,
-  ): HttpHeaders {
+  private _createHeaders(headers: IStrObject = {}): HttpHeaders {
     // basic header + custom
     const httpHeaders: IStrObject = {
       'Content-Type': this._defaultContentType,
       ...headers,
     };
-
-    // add auth
-    const token: string = window.localStorage.getItem('token');
-    if (auth && token) {
-      httpHeaders['Authorization'] = 'Bearer ' + token;
-    }
-
     return new HttpHeaders(httpHeaders);
   }
 
