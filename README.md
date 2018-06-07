@@ -1,4 +1,4 @@
-# ng6-sandbox
+# ng6-seed
 
 ## install factory
 1. Choose your version of the factory, by choosing a branch.
@@ -9,7 +9,7 @@
   -  `core+auth`: core + a classic register/login/user/logout token based auth.
   -  `core+lang+store`: @see above 
 2. Create a new folder for your project. Copy every files and folders except `node_modules`, `dist`, `package-lock.json`
-3. In your project, modify package.json project name, and other infos (you can replace ng6-sandbox by your project-name everywhere)
+3. In your project, modify package.json project name, and other infos (you can replace ng6-seed by your project-name everywhere)
 
 ## serve & build app
 
