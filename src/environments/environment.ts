@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  name: 'local',
   config: {
     mainApiUrl: 'http://localhost:3333/',
     testApiUrl: 'http://localhost:3333/',
