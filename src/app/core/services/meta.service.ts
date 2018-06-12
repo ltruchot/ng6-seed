@@ -19,7 +19,7 @@ export class MetaService {
   };
   public version: IMetaVersion = {
     version,
-    env: environment.production ? 'prod' : 'dev',
+    env: environment.name,
   };
   constructor(
     @Inject(DOCUMENT) private _document: HTMLDocument,
