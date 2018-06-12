@@ -10,11 +10,11 @@ import { tap, retryWhen } from 'rxjs/operators';
 import { of, defer } from 'rxjs';
 // values
 import { environment } from '@env/environment';
-import { retryReqStrategy } from '@app/core/values/retry-req-strategy.value';
+import { retryReqStrategyHelper } from '@app/core/helpers/retry-req-strategy.helper';
 // models
 import { IReqOptions, IRetryReqOptions } from '@models/http.model';
 
-describe('retryReqStrategy', () => {
+describe('retryReqStrategyHelper', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
@@ -57,7 +57,7 @@ describe('retryReqStrategy', () => {
       // do request, retry if needed, and catch any error as observable
       // defer is needed to allow params change  during retryWhen rxjs action
       defer(() => http.request('get', url, reqOptions))
-        .pipe(retryWhen(retryReqStrategy(retryOptions)))
+        .pipe(retryWhen(retryReqStrategyHelper(retryOptions)))
         .subscribe((user: any) => {
           expect(user.id).toBe('fakeid');
         });

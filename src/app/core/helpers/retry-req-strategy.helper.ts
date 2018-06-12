@@ -1,7 +1,7 @@
 import { Observable, throwError, empty, timer } from 'rxjs';
 import { mergeMap, finalize, tap, switchMap } from 'rxjs/operators';
 import { IRetryReqOptions } from '@models/http.model';
-export const retryReqStrategy = ({
+export const retryReqStrategyHelper = ({
   maxRetryAttempts = 0,
   scalingDuration = 0,
   statusCodes = [],

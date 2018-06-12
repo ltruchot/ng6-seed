@@ -6,7 +6,7 @@ import { Observable, defer, throwError } from 'rxjs';
 import { catchError, retryWhen, tap } from 'rxjs/operators';
 //  values
 import { environment } from '@env/environment';
-import { retryReqStrategy } from '@app/core/values/retry-req-strategy.value';
+import { retryReqStrategyHelper } from '@app/core/helpers/retry-req-strategy.helper';
 // models
 import { IStrObject } from '@models/common.model';
 import {
@@ -98,7 +98,7 @@ export class ApiService {
     return defer(
       () => this.http.request(action, url, reqOptions) as Observable<T>,
     ).pipe(
-      retryWhen(retryReqStrategy(retryOptions || {})),
+      retryWhen(retryReqStrategyHelper(retryOptions || {})),
       catchError(this._throwReactiveError),
     );
   }

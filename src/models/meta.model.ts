@@ -4,5 +4,5 @@ export interface IMetaSeo {
 }
 export interface IMetaVersion {
   version: string;
-  env: 'prod' | 'dev';
+  env: string;
 }
