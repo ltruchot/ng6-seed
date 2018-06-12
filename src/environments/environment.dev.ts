@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   name: 'dev',
   config: {
     mainApiUrl: 'http://localhost:3333/',

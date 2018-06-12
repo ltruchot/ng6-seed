@@ -1,6 +1,7 @@
 {
   "rulesDirectory": [
-    "node_modules/codelyzer"
+    "node_modules/codelyzer",
+    "node_modules/rxjs-tslint"  
   ],
   "extends": ["tslint:recommended"],
   "rules": {
@@ -29,7 +30,7 @@
     ],
     "interface-over-type-literal": true,
     "label-position": true,
-    "max-classes-per-file": [true, 9],
+    "max-classes-per-file": [true, 12],
     "max-line-length": [
       true,
       140
@@ -94,6 +95,10 @@
       "single"
     ],
     "radix": true,
+    "rxjs-collapse-imports": true,
+    "rxjs-pipeable-operators-only": true,
+    "rxjs-no-static-observable-methods": true,
+    "rxjs-proper-imports": true,
     "semicolon": [
       true,
       "always"
