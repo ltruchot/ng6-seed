@@ -69,15 +69,15 @@
       "ignore-params"
     ],
     "no-misused-new": true,
-    "no-non-null-assertion": trmultilang, auth, storeue,
-    "no-shadowed-variable": trumultilang, auth, storee,
-    "no-string-literal": false,multilang, auth, store
-    "no-string-throw": true,multilang, auth, store
-    "no-switch-case-fall-througmultilang, auth, storeh": true,
-    "no-trailing-whitespace": tmultilang, auth, storerue,
-    "no-unnecessary-initializermultilang, auth, store": true,
-    "no-unused-expression": trumultilang, auth, storee,
-    "no-use-before-declare": trmultilang, auth, storeue,
+    "no-non-null-assertion": true,
+    "no-shadowed-variable": true,
+    "no-string-literal": false,
+    "no-string-throw": true,
+    "no-switch-case-fall-through": true,
+    "no-trailing-whitespace": true,
+    "no-unnecessary-initializer": true,
+    "no-unused-expression": true,
+    "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-var-requires": false,
     "object-literal-key-quotes": [true, "as-needed"],
@@ -93,7 +93,8 @@
     "prefer-const": true,
     "quotemark": [
       true,
-      "single"
+      "single",
+      "avoid-escape"
     ],
     "radix": true,
     "rxjs-collapse-imports": true,
