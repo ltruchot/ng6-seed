@@ -48,13 +48,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Dependencies infos & versions
 
-Previous full update of dependencies: 2018-06-02
-* current project version 0.2.0
-* node 10.4.x
+Previous full update of dependencies: 2018-08-16
+* current project version 0.2.2
+* node 10.9.x
 * npm 6.1.x
-* @angular/cli 6.0.8
-* @angular/core 6.0.4
-* rxjs 6.2.0
+* @angular 6.1.3
+* rxjs 6.2.2
 * typescript 2.7.2
 
 Update native ng package: `ng update`
@@ -71,7 +70,6 @@ Update other dependencies: `ng update --all`
 * **@ngx-translate/http-loader**: A loader for ngx-translate that loads translations with http calls
 * **@ngrx/store**: RxJS powered state management for Angular applications, inspired by Redux
 
-## Test dependencies
+## Dev dependenvies (except @angular & typescript)
 
-@types/jasmine @types/jasminewd2 jasmine-core jasmine-spec-reporter karma karma-chrome-launcher karma-coverage-istanbul-reporter karma-jasmine karma-jasmine-html-reporter karma-mocha-reporter karma-phantomjs-launcher phantomjs-prebuilt protractor 
-
+@ngrx/schematics @types/jasmine @types/jasminewd2 @types/node codelyzer jasmine-core jasmine-spec-reporter json-server karma karma-chrome-launcher karma-coverage-istanbul-reporter karma-jasmine karma-jasmine-html-reporter karma-mocha-reporter karma-phantomjs-launcher phantomjs-prebuilt pm2 protractor ts-node tslint
